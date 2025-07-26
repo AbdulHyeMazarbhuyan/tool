@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickTools - Your All-in-One File Conversion Toolkit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --light-gray: #e9ecef;
+            --medium-gray: #adb5bd;
+            --dark-gray: #495057;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --border-radius: 8px;
+            --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fb;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f5f7fb 0%, #e8ecf4 100%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tool-categories {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .tool-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tool-link {
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .tool-link:hover {
+            color: var(--primary);
+            background-color: var(--light);
+        }
+
+        .tool-icon {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .features {
+            padding: 4rem 0;
+            background-color: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .feature-desc {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .cta {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .cta p {
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .tool-categories, .features, .cta {
+                padding: 3rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="/" class="logo">
+                <span class="logo-icon">🛠️</span>
+                <span>QuickTools</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#image-tools">Image Tools</a></li>
+                    <li><a href="#pdf-tools">PDF Tools</a></li>
+                    <li><a href="#office-tools">Office Tools</a></li>
+                    <li><a href="#merge-tools">Merge Tools</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Your All-in-One File Conversion Toolkit</h1>
+            <p>Convert, compress, and merge files in seconds with our free online tools. No installation required, completely secure, and works on any device.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <a href="#image-tools" class="btn">Get Started</a>
+                <a href="#all-tools" class="btn btn-outline">View All Tools</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="tool-categories" id="image-tools">
+        <div class="container">
+            <h2 class="section-title">Image Tools</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">🖼️</div>
+                    <h3 class="category-title">Compression</h3>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <a href="/image-compressor" class="tool-link">
+                                <span class="tool-icon">📐</span>
+                                <span>Image Compressor</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/jpg-compressor" class="tool-link">
+                                <span class="tool-icon">🖼️</span>
+                                <span>JPG Compressor</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/png-compressor" class="tool-link">
+                                <span class="tool-icon">🖌️</span>
+                                <span>PNG Compressor</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/webp-compressor" class="tool-link">
+                                <span class="tool-icon">🌐</span>
+                                <span>WEBP Compressor</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">🔄</div>
+                    <h3 class="category-title">Conversion</h3>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <a href="/image-converter" class="tool-link">
+                                <span class="tool-icon">🔄</span>
+                                <span>Image Converter</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/jpg-to-png" class="tool-link">
+                                <span class="tool-icon">🖼️→🖌️</span>
+                                <span>JPG to PNG</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/png-to-jpg" class="tool-link">
+                                <span class="tool-icon">🖌️→🖼️</span>
+                                <span>PNG to JPG</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/webp-to-jpg" class="tool-link">
+                                <span class="tool-icon">🌐→🖼️</span>
+                                <span>WEBP to JPG</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">📄</div>
+                    <h3 class="category-title">Image to PDF</h3>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <a href="/jpg-to-pdf" class="tool-link">
+                                <span class="tool-icon">🖼️→📄</span>
+                                <span>JPG to PDF</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/png-to-pdf" class="tool-link">
+                                <span class="tool-icon">🖌️→📄</span>
+                                <span>PNG to PDF</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/webp-to-pdf" class="tool-link">
+                                <span class="tool-icon">🌐→📄</span>
+                                <span>WEBP to PDF</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/merge-images-to-pdf" class="tool-link">
+                                <span class="tool-icon">🖼️+📄</span>
+                                <span>Merge Images to PDF</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="tool-categories" id="pdf-tools" style="background-color: var(--light);">
+        <div class="container">
+            <h2 class="section-title">PDF Tools</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">📄</div>
+                    <h3 class="category-title">PDF Conversion</h3>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <a href="/pdf-to-jpg" class="tool-link">
+                                <span class="tool-icon">📄→🖼️</span>
+                                <span>PDF to JPG</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/pdf-to-png" class="tool-link">
+                                <span class="tool-icon">📄→🖌️</span>
+                                <span>PDF to PNG</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/pdf-to-word" class="tool-link">
+                                <span class="tool-icon">📄→📝</span>
+                                <span>PDF to Word</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/pdf-to-excel" class="tool-link">
+                                <span class="tool-icon">📄→📊</span>
+                                <span>PDF to Excel</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">🔀</div>
+                    <h3 class="category-title">PDF Operations</h3>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <a href="/merge-pdf" class="tool-link">
+                                <span class="tool-icon">📄+📄</span>
+                                <span>Merge PDF Files</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/split-pdf" class="tool-link">
+                                <span class="tool-icon">✂️📄</span>
+                                <span>Split PDF</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/compress-pdf" class="tool-link">
+                                <span class="tool-icon">📐📄</span>
+                                <span>Compress PDF</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/pdf-to-text" class="tool-link">
+                                <span class="tool-icon">📄→✏️</span>
+                                <span>PDF to Text</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">📝</div>
+                    <h3 class="category-title">Create PDF</h3>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <a href="/word-to-pdf" class="tool-link">
+                                <span class="tool-icon">📝→📄</span>
+                                <span>Word to PDF</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/excel-to-pdf" class="tool-link">
+                                <span class="tool-icon">📊→📄</span>
+                                <span>Excel to PDF</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/ppt-to-pdf" class="tool-link">
+                                <span class="tool-icon">📽️→📄</span>
+                                <span>PowerPoint to PDF</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/html-to-pdf" class="tool-link">
+                                <span class="tool-icon">🌐→📄</span>
+                                <span>HTML to PDF</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="tool-categories" id="office-tools">
+        <div class="container">
+            <h2 class="section-title">Office Tools</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">📝</div>
+                    <h3 class="category-title">Word Tools</h3>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <a href="/word-to-pdf" class="tool-link">
+                                <span class="tool-icon">📝→📄</span>
+                                <span>Word to PDF</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/word-to-jpg" class="tool-link">
+                                <span class="tool-icon">📝→🖼️</span>
+                                <span>Word to JPG</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/merge-word" class="tool-link">
+                                <span class="tool-icon">📝+📝</span>
+                                <span>Merge Word Docs</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/word-to-text" class="tool-link">
+                                <span class="tool-icon">📝→✏️</span>
+                                <span>Word to Text</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">📊</div>
+                    <h3 class="category-title">Excel Tools</h3>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <a href="/excel-to-pdf" class="tool-link">
+                                <span class="tool-icon">📊→📄</span>
+                                <span>Excel to PDF</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/excel-to-jpg" class="tool-link">
+                                <span class="tool-icon">📊→🖼️</span>
+                                <span>Excel to JPG</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/merge-excel" class="tool-link">
+                                <span class="tool-icon">📊+📊</span>
+                                <span>Merge Excel Files</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/excel-to-csv" class="tool-link">
+                                <span class="tool-icon">📊→,</span>
+                                <span>Excel to CSV</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">📽️</div>
+                    <h3 class="category-title">PowerPoint Tools</h3>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <a href="/ppt-to-pdf" class="tool-link">
+                                <span class="tool-icon">📽️→📄</span>
+                                <span>PPT to PDF</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/ppt-to-jpg" class="tool-link">
+                                <span class="tool-icon">📽️→🖼️</span>
+                                <span>PPT to JPG</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/merge-ppt" class="tool-link">
+                                <span class="tool-icon">📽️+📽️</span>
+                                <span>Merge PPT Files</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/ppt-to-video" class="tool-link">
+                                <span class="tool-icon">📽️→🎬</span>
+                                <span>PPT to Video</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="tool-categories" id="merge-tools" style="background-color: var(--light);">
+        <div class="container">
+            <h2 class="section-title">Merge Tools</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">🖼️</div>
+                    <h3 class="category-title">Image Merging</h3>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <a href="/merge-images" class="tool-link">
+                                <span class="tool-icon">🖼️+🖼️</span>
+                                <span>Merge Images</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/merge-jpg" class="tool-link">
+                                <span class="tool-icon">🖼️+🖼️</span>
+                                <span>Merge JPG Files</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/merge-png" class="tool-link">
+                                <span class="tool-icon">🖌️+🖌️</span>
+                                <span>Merge PNG Files</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/images-to-pdf" class="tool-link">
+                                <span class="tool-icon">🖼️→📄</span>
+                                <span>Images to PDF</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">📄</div>
+                    <h3 class="category-title">PDF Merging</h3>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <a href="/merge-pdf" class="tool-link">
+                                <span class="tool-icon">📄+📄</span>
+                                <span>Merge PDF Files</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/merge-pdf-selected" class="tool-link">
+                                <span class="tool-icon">📄✂️</span>
+                                <span>Merge PDF Pages</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/pdf-to-booklet" class="tool-link">
+                                <span class="tool-icon">📄→📘</span>
+                                <span>PDF to Booklet</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/pdf-to-single" class="tool-link">
+                                <span class="tool-icon">📄→1️⃣</span>
+                                <span>PDF to Single Page</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">📝</div>
+                    <h3 class="category-title">Document Merging</h3>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <a href="/merge-word" class="tool-link">
+                                <span class="tool-icon">📝+📝</span>
+                                <span>Merge Word Docs</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/merge-excel" class="tool-link">
+                                <span class="tool-icon">📊+📊</span>
+                                <span>Merge Excel Files</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/merge-ppt" class="tool-link">
+                                <span class="tool-icon">📽️+📽️</span>
+                                <span>Merge PPT Files</span>
+                            </a>
+                        </li>
+                        <li class="tool-item">
+                            <a href="/merge-text" class="tool-link">
+                                <span class="tool-icon">✏️+✏️</span>
+                                <span>Merge Text Files</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose QuickTools</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Lightning Fast</h3>
+                    <p class="feature-desc">Process files in seconds with our optimized conversion engines.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">100% Secure</h3>
+                    <p class="feature-desc">Files are processed in your browser and never uploaded to our servers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💯</div>
+                    <h3 class="feature-title">High Quality</h3>
+                    <p class="feature-desc">Maintain excellent quality while reducing file sizes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🆓</div>
+                    <h3 class="feature-title">Completely Free</h3>
+                    <p class="feature-desc">All tools are free to use with no hidden charges.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3 class="feature-title">No Installation</h3>
+                    <p class="feature-desc">Works directly in your browser on any device.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Mobile Friendly</h3>
+                    <p class="feature-desc">Optimized for use on smartphones and tablets.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Boost Your Productivity?</h2>
+            <p>Join millions of users who save time with our free online tools every day.</p>
+            <a href="#image-tools" class="btn">Start Converting Now</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>QuickTools</h3>
+                    <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-bottom: 1rem;">Your all-in-one solution for file conversion and optimization.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="#image-tools">Image Tools</a></li>
+                        <li><a href="#pdf-tools">PDF Tools</a></li>
+                        <li><a href="#office-tools">Office Tools</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/tutorials">Tutorials</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/api">API</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; <span id="year"></span> QuickTools. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
